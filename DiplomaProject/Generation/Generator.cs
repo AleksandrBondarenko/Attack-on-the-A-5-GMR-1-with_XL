@@ -9,11 +9,6 @@ namespace DiplomaProject
 {
     public class Generator
     {
-        public const string gammaFileName = "gamma.json";
-        public const string xRowsFileName = "x.json";
-        public const string yRowsFileName = "y.json";
-        public const string zRowsFileName = "z.json";
-
         EquentialsGenerator _eGenerator = new EquentialsGenerator();
         GammaGenerator _gGenerator = new GammaGenerator();
 
@@ -23,17 +18,17 @@ namespace DiplomaProject
             var ySet = _eGenerator.GenerateY(equentialsCount);
             var zSet = _eGenerator.GenerateZ(equentialsCount);
 
-            using (FileStream fs = new FileStream(xRowsFileName, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(Constants.xRowsFileName, FileMode.OpenOrCreate))
             {
                 JsonSerializer.Serialize(fs, xSet);
             }
 
-            using (FileStream fs = new FileStream(yRowsFileName, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(Constants.yRowsFileName, FileMode.OpenOrCreate))
             {
                 JsonSerializer.Serialize(fs, ySet);
             }
 
-            using (FileStream fs = new FileStream(zRowsFileName, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(Constants.zRowsFileName, FileMode.OpenOrCreate))
             {
                 JsonSerializer.Serialize(fs, zSet);
             }
@@ -43,7 +38,7 @@ namespace DiplomaProject
         {
             var gamma = _gGenerator.GenerateGamma(key, gammaCount);
 
-            using (FileStream fs = new FileStream(gammaFileName, FileMode.OpenOrCreate))
+            using (FileStream fs = new FileStream(Constants.gammaFileName, FileMode.OpenOrCreate))
             {
                 JsonSerializer.Serialize(fs, gamma);
             }
