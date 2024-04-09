@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DiplomaProject
 {
     public class YRow : MonomRowBase
     {
-        private MonomBase[] _rowVector = new MonomY[Constants.YMonomsCount];
+        private MonomY[] _rowVector = new MonomY[Constants.YMonomsCount];
 
         override public int MonomsCount => Constants.YMonomsCount;
 
+        [JsonIgnore]
         override public MonomBase[] RowVector
+        {
+            get => _rowVector;
+        }
+
+        public MonomY[] RowYVector
         {
             get => _rowVector;
             set => _rowVector = value;

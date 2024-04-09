@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DiplomaProject
 {
     public class ZRow : MonomRowBase
     {
-        private MonomBase[] _rowVector = new MonomZ[Constants.ZMonomsCount];
+        private MonomZ[] _rowVector = new MonomZ[Constants.ZMonomsCount];
 
         override public int MonomsCount => Constants.ZMonomsCount;
 
+        [JsonIgnore]
         override public MonomBase[] RowVector
+        {
+            get => _rowVector;
+        }
+
+        public MonomZ[] RowZVector
         {
             get => _rowVector;
             set => _rowVector = value;

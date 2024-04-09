@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DiplomaProject
@@ -12,7 +13,8 @@ namespace DiplomaProject
 
         protected abstract void Init();
 
-        public abstract MonomBase[] RowVector { get; set; }
+        [JsonIgnore]
+        public abstract MonomBase[] RowVector { get; }
 
         public MonomRowBase() 
         {
