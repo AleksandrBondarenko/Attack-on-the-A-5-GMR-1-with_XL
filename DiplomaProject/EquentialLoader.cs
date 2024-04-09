@@ -9,26 +9,26 @@ namespace DiplomaProject
 {
     public class EquentialLoader
     {
-        public List<List<MonomX>> XSet { get; private set; }
-        public List<List<MonomY>> YSet { get; private set; }
-        public List<List<MonomZ>> ZSet { get; private set; }
+        public List<XRow> XSet { get; private set; }
+        public List<YRow> YSet { get; private set; }
+        public List<ZRow> ZSet { get; private set; }
         public List<ushort> Gamma { get; private set; }
 
         public void LoadAllData()
         {
             using (FileStream fs = new FileStream(Constants.xRowsFileName, FileMode.Open))
             {
-                XSet = JsonSerializer.Deserialize<List<List<MonomX>>>(fs);
+                XSet = JsonSerializer.Deserialize<List<XRow>>(fs);
             }
 
             using (FileStream fs = new FileStream(Constants.yRowsFileName, FileMode.Open))
             {
-                YSet = JsonSerializer.Deserialize<List<List<MonomY>>>(fs);
+                YSet = JsonSerializer.Deserialize<List<YRow>>(fs);
             }
 
             using (FileStream fs = new FileStream(Constants.zRowsFileName, FileMode.Open))
             {
-                ZSet = JsonSerializer.Deserialize<List<List<MonomZ>>>(fs);
+                ZSet = JsonSerializer.Deserialize<List<ZRow>>(fs);
             }
 
             using (FileStream fs = new FileStream(Constants.gammaFileName, FileMode.Open))

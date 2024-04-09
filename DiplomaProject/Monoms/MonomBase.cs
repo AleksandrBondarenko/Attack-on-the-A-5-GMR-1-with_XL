@@ -17,7 +17,7 @@ namespace DiplomaProject
     {
         public abstract int VariablesCount { get; }
         public abstract ushort[] MonomVector { get; set; }
-        public PresentFlag PresentState { get; set; }
+        public PresentFlag PresentState { get; set; } = PresentFlag.NotPresent;
 
         private static bool TheSameMonom(MonomBase a, MonomBase b)
         {

@@ -10,7 +10,14 @@ namespace DiplomaProject
     {
         public abstract int MonomsCount { get; }
 
+        protected abstract void Init();
+
         public abstract MonomBase[] RowVector { get; set; }
+
+        public MonomRowBase() 
+        {
+            Init();
+        }
 
         public override string ToString()
         {

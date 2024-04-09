@@ -18,13 +18,26 @@ namespace DiplomaProject
 
         public int Size { get => XRow.MonomsCount + YRow.MonomsCount + ZRow.MonomsCount; }
 
-        public SystemRow(XRow xRow, ZRow zRow, YRow yRow, ushort value)
+        public SystemRow(XRow xRow, YRow yRow, ZRow zRow, ushort value)
         {
             XRow = xRow;
             YRow = yRow;
             ZRow = zRow;
             Value = value;
         }
+
+        public SystemRow() 
+        {
+            Init();
+        }
+
+        protected void Init()
+        {
+            XRow = new XRow();
+            YRow = new YRow();
+            ZRow = new ZRow();
+        }
+
 
         public MonomBase this[int key]
         {

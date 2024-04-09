@@ -12,5 +12,9 @@ namespace DiplomaProject
         public const string xRowsFileName = "x.json";
         public const string yRowsFileName = "y.json";
         public const string zRowsFileName = "z.json";
+
+        public const int XMonomsCount = 190;
+        public const int YMonomsCount = 253;
+        public const int ZMonomsCount = 276;
     }
 }

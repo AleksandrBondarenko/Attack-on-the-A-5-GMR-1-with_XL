@@ -194,7 +194,7 @@ namespace DiplomaProject
             ZRegestry[0] = last;
         }
 
-        public List<List<MonomX>> GenerateX(int count)
+        public List<XRow> GenerateX(int count)
         {
             var generetedSet = new List<List<MonomX>>();
 
@@ -227,11 +227,11 @@ namespace DiplomaProject
                 RotateX();
             }
 
-            return generetedSet;
+            return generetedSet.Select(m => ToXRow(m)).ToList();
 
         }
 
-        public List<List<MonomY>> GenerateY(int count)
+        public List<YRow> GenerateY(int count)
         {
             var generetedSet = new List<List<MonomY>>();
 
@@ -264,11 +264,11 @@ namespace DiplomaProject
                 RotateY();
             }
 
-            return generetedSet;
+            return generetedSet.Select(m => ToYRow(m)).ToList(); ;
 
         }
 
-        public List<List<MonomZ>> GenerateZ(int count)
+        public List<ZRow> GenerateZ(int count)
         {
             var generetedSet = new List<List<MonomZ>>();
 
@@ -301,7 +301,7 @@ namespace DiplomaProject
                 RotateZ();
             }
 
-            return generetedSet;
+            return generetedSet.Select(m => ToZRow(m)).ToList();
 
         }
 
@@ -321,6 +321,42 @@ namespace DiplomaProject
                     resultList.Add(resultMonom);
                 }
             }
+        }
+
+        private XRow ToXRow(List<MonomX> monoms)
+        {
+            var result = new XRow();
+
+            foreach(var monom in monoms)
+            {
+                result.RowVector[monom.IndexInArray()] ^= monom;
+            }
+
+            return result;
+        }
+
+        private YRow ToYRow(List<MonomY> monoms)
+        {
+            var result = new YRow();
+
+            foreach (var monom in monoms)
+            {
+                result.RowVector[monom.IndexInArray()] ^= monom;
+            }
+
+            return result;
+        }
+
+        private ZRow ToZRow(List<MonomZ> monoms)
+        {
+            var result = new ZRow();
+
+            foreach (var monom in monoms)
+            {
+                result.RowVector[monom.IndexInArray()] ^= monom;
+            }
+
+            return result;
         }
 
         public override string ToString()
