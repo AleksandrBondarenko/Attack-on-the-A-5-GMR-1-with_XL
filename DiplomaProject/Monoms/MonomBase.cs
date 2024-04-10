@@ -28,6 +28,11 @@ namespace DiplomaProject
 
         protected abstract MonomBase And(MonomBase monom);
 
+        public int Degree()
+        {
+            return MonomVector.Count(m => m == 1);
+        }
+
         public static MonomBase operator |(MonomBase a, MonomBase b)
         {
             return a.And(b);

@@ -27,7 +27,10 @@ namespace DiplomaProject
 
             foreach(var monom in RowVector)
             {
-                sb.Append($"+{monom.ToString()}");
+                if(monom.PresentState == PresentFlag.Present)
+                {
+                    sb.Append($" + {monom.ToString()}");
+                }
             }
 
             sb.Remove(0, 1); //remove first +

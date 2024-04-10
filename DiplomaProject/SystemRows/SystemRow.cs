@@ -51,7 +51,7 @@ namespace DiplomaProject
                 {
                     return YRow.RowVector[key - XRow.MonomsCount];
                 }
-                else if (key < (XRow.MonomsCount + XRow.MonomsCount + ZRow.MonomsCount) && key >= 0)
+                else if (key < (XRow.MonomsCount + YRow.MonomsCount + ZRow.MonomsCount) && key >= 0)
                 {
                     return ZRow.RowVector[key - YRow.MonomsCount - XRow.MonomsCount];
                 }
@@ -64,14 +64,17 @@ namespace DiplomaProject
                 if (key < XRow.MonomsCount && key >= 0)
                 {
                     XRow.RowVector[key] = value;
+                    return;
                 }
                 else if (key < (XRow.MonomsCount + YRow.MonomsCount) && key >= 0)
                 {
                     YRow.RowVector[key - XRow.MonomsCount] = value;
+                    return;
                 }
-                else if (key < (XRow.MonomsCount + XRow.MonomsCount + ZRow.MonomsCount) && key >= 0)
+                else if (key < (XRow.MonomsCount + YRow.MonomsCount + ZRow.MonomsCount) && key >= 0)
                 {
                     ZRow.RowVector[key - YRow.MonomsCount - XRow.MonomsCount] = value;
+                    return;
                 }
 
                 throw new IndexOutOfRangeException();
@@ -88,6 +91,11 @@ namespace DiplomaProject
             a.Value ^= b.Value;
 
             return a;
+        }
+
+        public override string ToString()
+        {
+            return $"{XRow.ToString()} + {YRow.ToString()} + {ZRow.ToString()} = {Value}";
         }
     }
 }
