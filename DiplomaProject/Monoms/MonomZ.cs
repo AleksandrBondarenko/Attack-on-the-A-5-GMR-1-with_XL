@@ -8,11 +8,9 @@ namespace DiplomaProject
 {
     public class MonomZ : MonomBase
     {
-        private ushort[] _monomVector = new ushort[variablesCount];
+        private ushort[] _monomVector = new ushort[Constants.ZVariablesCount];
 
-        public const int variablesCount = 23;
-
-        public override int VariablesCount => variablesCount;
+        public override int VariablesCount => Constants.ZVariablesCount;
 
         public override ushort[] MonomVector
         {
@@ -24,7 +22,7 @@ namespace DiplomaProject
         {
             StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i < variablesCount; i++)
+            for (int i = 0; i < Constants.ZVariablesCount; i++)
             {
                 if (_monomVector[i] != 0)
                 {

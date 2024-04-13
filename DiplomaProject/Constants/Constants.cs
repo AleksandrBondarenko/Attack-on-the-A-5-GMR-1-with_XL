@@ -16,5 +16,9 @@ namespace DiplomaProject
         public const int XMonomsCount = 190;
         public const int YMonomsCount = 253;
         public const int ZMonomsCount = 276;
+
+        public const int XVariablesCount = 19;
+        public const int YVariablesCount = 22;
+        public const int ZVariablesCount = 23;
     }
 }

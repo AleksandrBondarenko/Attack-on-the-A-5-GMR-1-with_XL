@@ -8,9 +8,9 @@ namespace DiplomaProject
 {
     public class EquentialsGenerator
     {
-        private List<MonomBase>[] XRegestry = new List<MonomBase>[MonomX.variablesCount];
-        private List<MonomBase>[] YRegestry = new List<MonomBase>[MonomY.variablesCount];
-        private List<MonomBase>[] ZRegestry = new List<MonomBase>[MonomZ.variablesCount];
+        private List<MonomBase>[] XRegestry = new List<MonomBase>[Constants.XVariablesCount];
+        private List<MonomBase>[] YRegestry = new List<MonomBase>[Constants.YVariablesCount];
+        private List<MonomBase>[] ZRegestry = new List<MonomBase>[Constants.ZVariablesCount];
 
         public EquentialsGenerator()
         {
@@ -19,7 +19,7 @@ namespace DiplomaProject
 
         private void Initialize()
         {
-            for(int i = 0; i < MonomX.variablesCount; i++)
+            for(int i = 0; i < Constants.XVariablesCount; i++)
             {
                 XRegestry[i] = new List<MonomBase>();
                 var monom = new MonomX();
@@ -28,7 +28,7 @@ namespace DiplomaProject
 
             }
 
-            for (int i = 0; i < MonomY.variablesCount; i++)
+            for (int i = 0; i < Constants.YVariablesCount; i++)
             {
                 YRegestry[i] = new List<MonomBase>();
                 var monom = new MonomY();
@@ -36,7 +36,7 @@ namespace DiplomaProject
                 YRegestry[i].Add(monom);
             }
 
-            for (int i = 0; i < MonomZ.variablesCount; i++)
+            for (int i = 0; i < Constants.ZVariablesCount; i++)
             {
                 ZRegestry[i] = new List<MonomBase>();
                 var monom = new MonomZ();
@@ -47,7 +47,7 @@ namespace DiplomaProject
 
         private void RotateX()
         {
-            var last = XRegestry[MonomX.variablesCount - 1];
+            var last = XRegestry[Constants.XVariablesCount - 1];
 
             //calculate new - 13, 16, 17
             
@@ -87,7 +87,7 @@ namespace DiplomaProject
                 }
             }
 
-            for (int i = MonomX.variablesCount - 1; i > 0; i--)
+            for (int i = Constants.XVariablesCount - 1; i > 0; i--)
             {
                 XRegestry[i] = XRegestry[i - 1];
             }
@@ -97,7 +97,7 @@ namespace DiplomaProject
 
         private void RotateY()
         {
-            var last = YRegestry[MonomY.variablesCount - 1];
+            var last = YRegestry[Constants.YVariablesCount - 1];
 
             //calculate new - 12, 16, 20
 
@@ -137,7 +137,7 @@ namespace DiplomaProject
                 }
             }
 
-            for (int i = MonomY.variablesCount - 1; i > 0; i--)
+            for (int i = Constants.YVariablesCount - 1; i > 0; i--)
             {
                 YRegestry[i] = YRegestry[i - 1];
             }
@@ -146,7 +146,7 @@ namespace DiplomaProject
         }
         private void RotateZ()
         {
-            var last = ZRegestry[MonomZ.variablesCount - 1];
+            var last = ZRegestry[Constants.ZVariablesCount - 1];
 
             //calculate new - 17, 18, 21
 
@@ -186,7 +186,7 @@ namespace DiplomaProject
                 }
             }
 
-            for (int i = MonomZ.variablesCount - 1; i > 0; i--)
+            for (int i = Constants.ZVariablesCount - 1; i > 0; i--)
             {
                 ZRegestry[i] = ZRegestry[i - 1];
             }

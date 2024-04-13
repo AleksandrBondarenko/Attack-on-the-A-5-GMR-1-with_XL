@@ -4,12 +4,15 @@
 using DiplomaProject;
 using System.Runtime.CompilerServices;
 
+var hacker = new KeyHacker();
+
+hacker.HackKey();
 
 
-var generator = new Generator();
+//var generator = new Generator();
 
-generator.GenerateEquentialsFiles(800);
-generator.GenerateGammaFile(0x4CED482318BE6784U, 800);
+//generator.GenerateEquentialsFiles(800);
+//generator.GenerateGammaFile(0x4CED482318BE6784U, 800);
 
 //0xFFF141BB26E901EB
 //0111110001010010001000001000010111 

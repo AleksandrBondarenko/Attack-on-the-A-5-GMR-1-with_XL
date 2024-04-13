@@ -33,7 +33,10 @@ namespace DiplomaProject
                 }
             }
 
-            sb.Remove(0, 1); //remove first +
+            if (sb.Length != 0) 
+            { 
+                sb.Remove(0, 1); //remove first +
+            }
 
             return sb.ToString();
         }
@@ -53,5 +56,32 @@ namespace DiplomaProject
 
             return a;
         }
+
+        public override bool Equals(Object? obj)
+        {
+            if (obj == null || !(obj is MonomRowBase))
+            {
+                return false;
+            }
+            else
+            {
+                for (int i = 0; i < MonomsCount; i++)
+                {
+                    if (!RowVector[i].Equals(((MonomRowBase)obj).RowVector[i]) || RowVector[i].PresentState != ((MonomRowBase)obj).RowVector[i].PresentState)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.RowVector.GetHashCode();
+        }
+
+        public bool IsNotEmpty { get => RowVector.Any(m => m.PresentState == PresentFlag.Present); }
     }
 }

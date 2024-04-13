@@ -27,9 +27,9 @@ namespace DiplomaProject
 
         protected override void Init()
         {
-            for (int i = 0; i < MonomY.variablesCount; i++)
+            for (int i = 0; i < Constants.YVariablesCount; i++)
             {
-                for (int j = i; j < MonomY.variablesCount; j++)
+                for (int j = i; j < Constants.YVariablesCount; j++)
                 {
                     var monom = new MonomY();
                     monom.MonomVector[i] = 1;

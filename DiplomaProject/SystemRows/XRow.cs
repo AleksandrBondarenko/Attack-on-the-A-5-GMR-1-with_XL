@@ -28,9 +28,9 @@ namespace DiplomaProject
 
         protected override void Init()
         {
-            for(int i = 0; i < MonomX.variablesCount; i++)
+            for(int i = 0; i < Constants.XVariablesCount; i++)
             {
-                for (int j = i; j < MonomX.variablesCount; j++)
+                for (int j = i; j < Constants.XVariablesCount; j++)
                 {
                     var monom = new MonomX();
                     monom.MonomVector[i] = 1;

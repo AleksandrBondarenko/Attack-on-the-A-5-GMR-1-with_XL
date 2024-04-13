@@ -27,9 +27,9 @@ namespace DiplomaProject
 
         protected override void Init()
         {
-            for (int i = 0; i < MonomZ.variablesCount; i++)
+            for (int i = 0; i < Constants.ZVariablesCount; i++)
             {
-                for (int j = i; j < MonomZ.variablesCount; j++)
+                for (int j = i; j < Constants.ZVariablesCount; j++)
                 {
                     var monom = new MonomZ();
                     monom.MonomVector[i] = 1;
