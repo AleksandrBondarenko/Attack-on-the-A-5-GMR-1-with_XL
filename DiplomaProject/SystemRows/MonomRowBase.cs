@@ -31,7 +31,6 @@ namespace DiplomaProject
                 {
                     sb.Append($" + {monom.ToString()}");
                 }
-                sb.Append($" + {monom.ToString()}");
             }
 
             if (sb.Length != 0) 

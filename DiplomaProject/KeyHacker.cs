@@ -10,7 +10,7 @@ namespace DiplomaProject
     {
         private EquentialLoader _dataLoader = new EquentialLoader();
 
-        private const int _systemSize = 700;
+        private const int _systemSize = 670;
 
         private List<SystemRow> _system = new List<SystemRow>();
 
@@ -60,7 +60,7 @@ namespace DiplomaProject
 
                 //now we have part only with z part
 
-                var zrows = new List<ZRow>();
+                var ZSubSystem = new List<SingleMonomSystemRow>();
 
 
                 _system.Reverse();
@@ -68,17 +68,18 @@ namespace DiplomaProject
                 {
                     if (!row.XRow.IsNotEmpty && !row.YRow.IsNotEmpty && row.ZRow.IsNotEmpty)
                     {
-                        zrows.Add((ZRow)row.ZRow);
-                        Console.Write("\n");
-                        Console.WriteLine(row.ToString());
-                        if(zrows.Count == 1)
-                        {
-                            break;
-                        }
+                        var z3row = new SingleMonomSystemRow((ZRow)row.ZRow, row.Value);
+                        ZSubSystem.Add(z3row);
+                        //Console.Write("\n");
+                        //Console.WriteLine(z3row.ToString());
                     }
                 }
 
-                var sknfs = zrows.Select(r => r.ToZSknf()).ToList();
+                ExpandSubSystem(ZSubSystem);
+
+                
+
+                //var sknfs = zrows.Select(r => r.ToZSknf()).ToList();
 
                 //if (result)
                 //{
@@ -94,9 +95,117 @@ namespace DiplomaProject
                 //    Console.Write("\n");
                 //    Console.Write(sb.ToString());
                 //}
+                Console.Write("\n");
+                Console.Write($"{Gauss(ZSubSystem)}");
+                Console.Write("\n");
+                var sb = new StringBuilder();
+                for (int i = 0; i < Constants.ZMonomsCountThirdDegree; i++)
+                {
+                    if (ZSubSystem[i][i].Degree() == 1)
+                    {
+                        sb.Append($"{ZSubSystem[i][i].ToString()} = {ZSubSystem[i].Value}\n");
+                    }
+
+                }
+                Console.Write("\n");
+                Console.Write(sb.ToString());
 
                 result = true;
             }
+        }
+
+        private bool Gauss(List<SingleMonomSystemRow> system)
+        {
+            bool res = true;
+            int maxSize = system.Count < Constants.ZMonomsCountThirdDegree ? system.Count : Constants.ZMonomsCountThirdDegree;
+            for (int i = 0; i < maxSize; i++)
+            {
+
+                if (system[i][i].PresentState == PresentFlag.NotPresent)
+                {
+                    int notZeroIndex = NextNotZeroStringIndexZSystem(i, system);
+
+                    if (notZeroIndex == -1)
+                    {
+                        break;
+                    }
+
+                    system[i] ^= system[NextNotZeroStringIndexZSystem(i, system)];
+                }
+                for (int j = i + 1; j < _system.Count; j++)
+                {
+                    if (system[j][i].PresentState == PresentFlag.Present)
+                    {
+                        system[j] ^= system[i];
+
+                    }
+                }
+            }
+
+            // check for sucsess
+
+            //if (maxSize < 719)
+            //{
+            //    return false;
+            //}
+
+            //for (int i = 0; i < 719; i++)
+            //{
+            //    if (_system[i][i].PresentState == PresentFlag.NotPresent)
+            //    {
+            //        return false;
+            //    }
+            //}
+
+            for (int i = maxSize; i < _system.Count; i++)
+            {
+                if (system[i].ZRow.RowVector.Any(z => z.PresentState == PresentFlag.Present) ||
+                    system[i].Value != 0u
+                    )
+                {
+                    res = false;
+                }
+            }
+
+            for (int i = 0; i < _system.Count; i++) 
+            {
+                Console.WriteLine(system[i].ToString());
+            }
+
+            //reverted direction
+
+            for (int i = maxSize - 1; i >= 0; i--)
+            {
+                if (system[i][i].PresentState == PresentFlag.Present)
+                {
+                    for (int j = i - 1; j >= 0; j--)
+                    {
+                        if (system[j][i].PresentState == PresentFlag.Present)
+                        {
+                            system[j] ^= system[i];
+
+                        }
+                    }
+                }
+            }
+            return res;
+        }
+
+        private void ExpandSubSystem(List<SingleMonomSystemRow> subsystem)
+        {
+            var expansion = new List<SingleMonomSystemRow>();
+            for (int i = 0; i < Constants.ZVariablesCount; i++) 
+            {
+                var nextMonom = new MonomZ();
+                nextMonom.MonomVector[i] = 1;
+                foreach (var row in subsystem)
+                {
+                    var newRow = row & nextMonom;
+                    expansion.Add(newRow);
+                }
+            }
+
+            subsystem.AddRange(expansion);
         }
 
         private void GenerateSystem(uint regValue)
@@ -210,6 +319,18 @@ namespace DiplomaProject
                 }
             }
             return true;
+        }
+
+        private int NextNotZeroStringIndexZSystem(int pos, List<SingleMonomSystemRow> system)
+        {
+            for (int i = pos + 1; i < system.Count; i++)
+            {
+                if (system[i][pos].PresentState == PresentFlag.Present)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         private int NextNotZeroStringIndex(int pos)

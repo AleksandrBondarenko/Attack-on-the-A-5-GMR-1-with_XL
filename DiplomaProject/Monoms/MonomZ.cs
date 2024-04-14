@@ -44,7 +44,7 @@ namespace DiplomaProject
 
             for (int i = 0; i < VariablesCount; i++)
             {
-                result.MonomVector[i] = (ushort)(this.MonomVector[i] & monom.MonomVector[i]);
+                result.MonomVector[i] = (ushort)(this.MonomVector[i] | monom.MonomVector[i]);
             }
 
             return result;

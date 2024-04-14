@@ -27,7 +27,7 @@ namespace DiplomaProject
 
         protected void Init()
         {
-            ZRow = new ZRow();
+            ZRow = new ZRow3Degree();
         }
 
 
@@ -55,6 +55,24 @@ namespace DiplomaProject
         }
 
         //XOR
+        public static SingleMonomSystemRow operator &(SingleMonomSystemRow a, MonomZ b)
+        {
+            var res = new SingleMonomSystemRow();
+            foreach (var monom in a.ZRow.RowVector.Where(m => m.PresentState == PresentFlag.Present))
+            {
+                var newMonom = monom & b;
+                newMonom.PresentState = PresentFlag.Present;
+                res.ZRow.RowVector[newMonom.IndexInArrayThirdDegree()] ^= newMonom;
+            }
+            if (a.Value == 1)
+            {
+                res.ZRow.RowVector[b.IndexInArrayThirdDegree()] ^= b;
+                res.Value = 0;
+            }
+
+            return res;
+        }
+
         public static SingleMonomSystemRow operator ^(SingleMonomSystemRow a, SingleMonomSystemRow b)
         {
             a.ZRow ^= b.ZRow;
